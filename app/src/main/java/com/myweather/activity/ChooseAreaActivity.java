@@ -1,7 +1,9 @@
-package com.myweather;
+package com.myweather.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.myweather.R;
 
 public class ChooseAreaActivity extends Activity {
 
