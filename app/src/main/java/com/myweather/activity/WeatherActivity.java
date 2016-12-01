@@ -14,6 +14,7 @@ import com.myweather.R;
 import com.myweather.util.HttpCallbackListener;
 import com.myweather.util.HttpUtils;
 import com.myweather.util.JsonUtils;
+import com.myweather.util.SplitUtils;
 
 public class WeatherActivity extends Activity {
 
@@ -81,14 +82,31 @@ public class WeatherActivity extends Activity {
         Log.i("WeatherActivity",weatherCode);
 
         String address="http://www.weather.com.cn/data/cityinfo/"+weatherCode+".html";
+
+         /*
+        测试log 测试成功
+         */
+        Log.i("WeatherActivity",address);
+
         queryFromServer(address,"weatherCode");
+
+
 
     }
 
     private void queryFromServer(final String address, final String type) {
+
+
+
         HttpUtils.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
+
+                /*
+                测试log
+                 */
+                Log.i("queryFromServer",address);
+
                 if("countyCode".equals(type)){
                     if(!TextUtils.isEmpty(response)){
                         String[] array = response.split("\\|");
@@ -96,33 +114,34 @@ public class WeatherActivity extends Activity {
                             String weatherCode = array[1];
                             queryWeatherInfo(weatherCode);
                         }
-                    }else if("weatherCode".equals(type)){
-
-                        /*
-                        测试log
-                         */
-                        Log.i("WeatherActivity","处理服务器返回的天气信息");
-
-                        //处理服务器返回的天气信息
-                        JsonUtils.handleWeatherResponse(WeatherActivity.this,response);
-
-                        /*
-                        测试log
-                         */
-                        Log.i("WeatherActivity","处理服务器返回的天气信息");
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showWeather();
-                            }
-                        });
                     }
+                }else if("weatherCode".equals(type)){
+
+                        /*
+                        测试log
+                         */
+                    Log.i("WeatherActivity","处理服务器返回的天气信息");
+
+                    //处理服务器返回的天气信息
+                    JsonUtils.handleWeatherResponse(WeatherActivity.this,response);
+
+                        /*
+                        测试log
+                         */
+                    Log.i("WeatherActivity","处理服务器返回的天气信息");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showWeather();
+                        }
+                    });
                 }
             }
 
             @Override
             public void onError(Exception e) {
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

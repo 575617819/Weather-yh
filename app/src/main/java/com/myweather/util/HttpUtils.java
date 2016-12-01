@@ -1,11 +1,9 @@
 package com.myweather.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -43,19 +41,11 @@ public class HttpUtils {
                         listener.onFinish(response.toString());
                     }
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                   if(listener!=null){
+                       listener.onError(e);
+                   }
 
-                    if (listener != null) {
-                        listener.onError(e);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-                    if (listener != null) {
-                        listener.onError(e);
-                    }
 
                 } finally {
                     if (connection != null) {
