@@ -1,1 +1,1 @@
-include ':app', ':fragmentsmsdemo'
+include ':app', ':fragmentsmsdemo', ':撕衣服demo'
