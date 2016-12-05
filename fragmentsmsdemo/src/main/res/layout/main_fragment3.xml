@@ -3,12 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#57c948"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_main3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="设置"/>
+    <ListView
+        android:id="@+id/lv_fragment3_yuandan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 </LinearLayout>
