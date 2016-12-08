@@ -6,8 +6,10 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fragment.sms.fragment.MainFragment1;
 import com.fragment.sms.fragment.MainFragment2;
@@ -39,10 +41,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tv_main_text3;
     private TextView tv_main_text4;
 
+    private TextView tv_main_title;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+         /*
+         沉浸式状态栏设置
+         透明状态栏、透明导航栏
+         */
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         initViews();
         setTabSelection(0);//默认选中主页面
     }
@@ -70,6 +82,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         rl_main_fragment2.setOnClickListener(this);
         rl_main_fragment3.setOnClickListener(this);
         rl_main_fragment4.setOnClickListener(this);
+
+        tv_main_title = (TextView) findViewById(R.id.tv_main_title);
 
     }
 
@@ -110,26 +124,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
         hideFragments(transaction);
         switch (index) {
             case 0:
-                iv_main_image1.setImageResource(R.drawable.m_zhuye_yes);
-                tv_main_text1.setTextColor(Color.BLUE);
+                tv_main_title.setText("新年祝福");
+                iv_main_image1.setImageResource(R.drawable.image_newyear_yes);
+                tv_main_text1.setTextColor(getResources().getColor(R.color.colorTabSelect));
                 mainFragment1 = new MainFragment1();
                 transaction.replace(R.id.main_viewArea, mainFragment1);
                 break;
             case 1:
-                iv_main_image2.setImageResource(R.drawable.m_yingyong_yes);
-                tv_main_text2.setTextColor(Color.BLUE);
+                tv_main_title.setText("圣诞祝福");
+                iv_main_image2.setImageResource(R.drawable.image_shengdan_yes);
+                tv_main_text2.setTextColor(getResources().getColor(R.color.colorTabSelect));
                 mainFragment2 = new MainFragment2();
                 transaction.replace(R.id.main_viewArea, mainFragment2);
                 break;
             case 2:
-                iv_main_image3.setImageResource(R.drawable.m_fenxiang_yes);
-                tv_main_text3.setTextColor(Color.BLUE);
+                tv_main_title.setText("元旦祝福");
+                iv_main_image3.setImageResource(R.drawable.image_yuandan_yes);
+                tv_main_text3.setTextColor(getResources().getColor(R.color.colorTabSelect));
                 mainFragment3 = new MainFragment3();
                 transaction.replace(R.id.main_viewArea, mainFragment3);
                 break;
             case 3:
-                iv_main_image4.setImageResource(R.drawable.m_wode_yes);
-                tv_main_text4.setTextColor(Color.BLUE);
+                tv_main_title.setText("生日祝福");
+                iv_main_image4.setImageResource(R.drawable.image_birthday_yes);
+                tv_main_text4.setTextColor(getResources().getColor(R.color.colorTabSelect));
                 mainFragment4 = new MainFragment4();
                 transaction.replace(R.id.main_viewArea, mainFragment4);
                 break;
@@ -142,14 +160,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * 清除掉所有的选中状态。
      */
     private void clearSelection() {
-        iv_main_image1.setImageResource(R.drawable.m_zhuye_no);
-        tv_main_text1.setTextColor(Color.WHITE);
-        iv_main_image2.setImageResource(R.drawable.m_yingyong_no);
-        tv_main_text2.setTextColor(Color.WHITE);
-        iv_main_image3.setImageResource(R.drawable.m_fenxiang_no);
-        tv_main_text3.setTextColor(Color.WHITE);
-        iv_main_image4.setImageResource(R.drawable.m_wode_no);
-        tv_main_text4.setTextColor(Color.WHITE);
+        iv_main_image1.setImageResource(R.drawable.image_newyear_no);
+        tv_main_text1.setTextColor(getResources().getColor(R.color.colorTab));
+        iv_main_image2.setImageResource(R.drawable.image_shengdan_no);
+        tv_main_text2.setTextColor(getResources().getColor(R.color.colorTab));
+        iv_main_image3.setImageResource(R.drawable.image_yuandan_no);
+        tv_main_text3.setTextColor(getResources().getColor(R.color.colorTab));
+        iv_main_image4.setImageResource(R.drawable.image_birthday_no);
+        tv_main_text4.setTextColor(getResources().getColor(R.color.colorTab));
     }
 
     /**
@@ -169,6 +187,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         if (mainFragment4 != null) {
             transaction.hide(mainFragment4);
+        }
+    }
+
+
+    /**
+     * 两次返回键退出程序
+     */
+    private long exitTime=0;
+    @Override
+    public void onBackPressed() {
+
+        if(System.currentTimeMillis()-exitTime>2000){
+            Toast.makeText(MainActivity.this,"再按一次退出应用",Toast.LENGTH_SHORT).show();
+            exitTime=System.currentTimeMillis();
+        }else{
+            finish();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());//彻底关闭进程，执行此方法的activity不会执行onDestroy方法
         }
     }
 

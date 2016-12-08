@@ -4,12 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#80b67f"
+        >
+        <TextView
+            android:id="@+id/tv_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新年祝福"
+            android:textColor="@color/colorTabSelect"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:paddingTop="20dp"
+            />
+    </RelativeLayout>
+
+
     <FrameLayout
         android:id="@+id/main_viewArea"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_weight="1"
+        >
     </FrameLayout>
 
 
@@ -17,7 +36,7 @@
         android:id="@+id/main_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#94bc45">
+        android:background="#ffffff">
 
         <!--主页-->
         <RelativeLayout
@@ -38,7 +57,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/m_zhuye_no" />
+                    android:src="@drawable/image_newyear_no" />
 
                 <TextView
                     android:id="@+id/tv_main_text1"
@@ -46,9 +65,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="2dp"
-                    android:text="主页"
-                    android:textColor="#fff"
+                    android:text="新年"
+                    android:textColor="#594a4a"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:visibility="visible" />
             </LinearLayout>
         </RelativeLayout>
@@ -71,7 +91,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/m_yingyong_no" />
+                    android:src="@drawable/image_shengdan_no" />
 
                 <TextView
                     android:id="@+id/tv_main_text2"
@@ -79,9 +99,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="2dp"
-                    android:text="应用"
-                    android:textColor="#fff"
+                    android:text="圣诞"
+                    android:textColor="#594a4a"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:visibility="visible" />
             </LinearLayout>
         </RelativeLayout>
@@ -104,7 +125,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/m_fenxiang_no" />
+                    android:src="@drawable/image_yuandan_no" />
 
                 <TextView
                     android:id="@+id/tv_main_text3"
@@ -112,9 +133,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="2dp"
-                    android:text="分享"
-                    android:textColor="#fff"
+                    android:text="元旦"
+                    android:textColor="#594a4a"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:visibility="visible" />
             </LinearLayout>
         </RelativeLayout>
@@ -137,7 +159,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/m_wode_no" />
+                    android:src="@drawable/image_birthday_no" />
 
                 <TextView
                     android:id="@+id/tv_main_text4"
@@ -145,9 +167,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="2dp"
-                    android:text="我的"
-                    android:textColor="#fff"
+                    android:text="生日"
+                    android:textColor="#594a4a"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:visibility="visible" />
             </LinearLayout>
         </RelativeLayout>
