@@ -3,8 +3,8 @@ package com.fragment.sms.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -43,6 +43,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private TextView tv_main_title;
 
+    private float rawX1;
+    private float rawY1;
+    private float rawX2;
+    private float rawY2;
+    private float x;
+    private float y;
+
+    private static int index1=0;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +67,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         initViews();
         setTabSelection(0);//默认选中主页面
+
     }
 
     /**
@@ -88,22 +99,82 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                rawX1 = event.getRawX();
+                rawY1 = event.getRawY();
+                break;
+            case MotionEvent.ACTION_UP:
+                rawX2 = event.getRawX();
+                rawY2 = event.getRawY();
+                slideChange(index1);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void slideChange(int i) {
+        x = Math.abs(rawX1-rawX2);
+        y = Math.abs(rawY1 - rawY2);
+
+        /*
+        获取像素密度
+         */
+        float density=getResources().getDisplayMetrics().density;
+        float px = density * 30;
+
+        if(x > y){
+           if(Math.abs(rawX2)-Math.abs(rawX1)>px){
+               /*
+               右滑
+                */
+               if(i==0){
+                   setTabSelection(0);
+                   index1=0;
+               }else{
+                   setTabSelection(i-1);
+                   index1-=1;
+               }
+           }else if(Math.abs(rawX1)-Math.abs(rawX2)>px){
+               /*
+               左滑
+                */
+               if(i==3){
+                   setTabSelection(3);
+                   index1=3;
+               }else{
+                   setTabSelection(i+1);
+                   index1+=1;
+               }
+           }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_main_fragment1:
                 // 当点击了消息tab时，选中第1个tab
+                index1=0;
                 setTabSelection(0);
                 break;
             case R.id.rl_main_fragment2:
                 // 当点击了联系人tab时，选中第2个tab
+                index1=1;
                 setTabSelection(1);
                 break;
             case R.id.rl_main_fragment3:
                 // 当点击了动态tab时，选中第3个tab
+                index1=2;
                 setTabSelection(2);
                 break;
             case R.id.rl_main_fragment4:
                 // 当点击了设置tab时，选中第4个tab
+                index1=3;
                 setTabSelection(3);
                 break;
         }

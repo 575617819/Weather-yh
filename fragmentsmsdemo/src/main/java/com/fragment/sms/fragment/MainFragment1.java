@@ -2,6 +2,7 @@ package com.fragment.sms.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.fragment.sms.R;
+import com.fragment.sms.activity.MainActivity;
 
 public class MainFragment1 extends Fragment {
 
